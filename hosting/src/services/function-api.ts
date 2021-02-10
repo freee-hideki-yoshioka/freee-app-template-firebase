@@ -22,6 +22,16 @@ class FunctionApi {
     })
     return response.data
   }
+
+  async getFunction() {
+    const response = await firebaseUtils.function('getFunction')
+    return response.data
+  }
+
+  async getFirestore() {
+    const response = await firebaseUtils.function('getFirestore')
+    return response.data
+  }
 }
 
 export const FunctionAPI = new FunctionApi()

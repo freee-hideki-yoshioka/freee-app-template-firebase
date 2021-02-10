@@ -4,11 +4,21 @@ import * as functions from 'firebase-functions'
 import freeeSDK from './freee_sdk/instance'
 import { authApp } from './routes/auth'
 import { FreeeAPI } from './services/freee-api'
+import * as admin from 'firebase-admin';
 import { createReadStream } from 'fs'
-
+admin.initializeApp();
 const baseFunction = functions.region('asia-northeast1')
 
 exports.api = baseFunction.https.onRequest(authApp)
+
+exports.getFunction = baseFunction.https.onCall(() => {
+  return "success_getFunction"
+})
+
+exports.getFirestore = baseFunction.https.onCall(() => {
+  return admin.firestore().collection("freeeTokens").doc("31945681").get()
+  // return admin.firestore().doc(`/freeeTokens/3194568`).get()
+})
 
 exports.usersMe = baseFunction.https.onCall((data: any) => {
   return FreeeAPI.getUsersMe(data.userId)
@@ -44,7 +54,7 @@ exports.postReceipt = baseFunction
   .runWith({ timeoutSeconds: 180 })
   .https.onCall((data: any) => {
     const { userId, companyId } = data
-    const receipt = createReadStream('./functions/dist/test.csv')
+    const receipt = createReadStream('/Users/yoshioka-hideki/freee-work/freee-app-template-firebase/test_error.jpg')
 
     const sendData = {
       receipt: receipt,

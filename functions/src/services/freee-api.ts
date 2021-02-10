@@ -170,10 +170,13 @@ class FreeeApi {
     userId: string,
     companyId: string,
     id: string
-  ): Promise<DealResponse> {
+  ): Promise<any> {
     return api
-      .get<DealResponse>(`api/1/deals/${id}`, { company_id: companyId }, userId)
-      .then(response => response.data)
+      .get<DealResponse>(`api/1/deals/718306723`, { company_id: companyId }, userId)
+      .then(response => {
+        console.log(response.data)
+        response.data
+      })
   }
 
   /**
@@ -210,7 +213,7 @@ class FreeeApi {
     console.log('post FormData:', params)
     return api
       .post<T>(path, params, userId)
-      .then(response => response.data)
+      .then(response => console.log(response))
       .catch(error => {
         console.error(`Error occured for posting ${path}:`, error.response)
         return error.response.data // TODO return proper response

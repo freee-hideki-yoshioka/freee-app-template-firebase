@@ -3,6 +3,7 @@ import { FunctionAPI } from './services/function-api'
 import { getRedirectUrl } from './utils/path'
 // tslint:disable-next-line:no-import-side-effect
 import './main.css'
+import * as admin from 'firebase-admin'
 
 class Demo {
   private lastUid: string
@@ -102,7 +103,11 @@ class Demo {
   private async onAuthStateChanged(user: firebase.User) {
     // Skip token refresh.
     if (user && user.uid === this.lastUid) return
-
+    const getFunction = await FunctionAPI.getFunction()
+    const getFirestore = await FunctionAPI.getFirestore()
+  //  const firestore = await firebase.firestore().collection("freeeTokens").doc("3194568").get()
+    console.log(getFunction)
+    console.log(getFirestore)
     if (user) {
       this.login(user)
     } else {
@@ -150,6 +155,8 @@ class Demo {
   }
 
   private async login(user: firebase.User) {
+
+
     this.lastUid = user.uid
     this.nameContainer.innerText = user.displayName!
     this.uidContainer.innerText = user.uid
@@ -176,6 +183,7 @@ class Demo {
     this.setCompany(this.companies[0].id, this.companies[0].display_name)
     this.initAccountItems(user)
     this.setAmount('1')
+
     this.loadingContainer.style.display = 'none'
     this.mainContainer.style.display = 'block'
   }
