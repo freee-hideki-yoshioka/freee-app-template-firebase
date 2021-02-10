@@ -30,7 +30,7 @@ exports.postReceipt = baseFunction
   .https.onCall((data: any) => {
     const { userId, companyId } = data
     const receipt = createReadStream(
-      '/Users/yoshioka-hideki/freee-work/freee-app-template-firebase/test_error.jpg'
+      'test.jpg'
     )
 
     const sendData = {
