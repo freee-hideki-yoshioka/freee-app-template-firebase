@@ -24,7 +24,7 @@
     "express": "^4.16.4",
     "firebase-admin": "^8.0.0",
     "firebase-functions": "^3.1.0",
-    "freee-firebase-sdk": "git+https://git@github.com/freee-hideki-yoshioka/firebase-sdk-js.git#feautre/v2.0.4"
+    "freee-firebase-sdk": "git+https://git@github.com/freee-hideki-yoshioka/firebase-sdk-js.git#feature/v2.0.4"
   },
   "devDependencies": {
     "tslint": "^5.12.0",
