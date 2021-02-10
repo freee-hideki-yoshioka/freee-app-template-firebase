@@ -59,6 +59,15 @@ export interface Detail {
   id: number // TODO add fields
 }
 
+export interface Receipt {
+  id: number
+  file_src: string
+}
+
+export interface ReceiptResponse {
+  receipt: Receipt
+}
+
 class FreeeApi {
   /**
    * GET /users/me
@@ -106,6 +115,38 @@ class FreeeApi {
     console.log('post requestParams:', requestParams)
     return api
       .post<T>(path, requestParams, userId)
+      .then(response => response.data)
+      .catch(error => {
+        console.error(`Error occured for posting ${path}:`, error.response)
+        return error.response.data // TODO return proper response
+      })
+  }
+
+  /**
+   * POST /api/1/receipts contentType
+   */
+  async postReceipt(
+    userId: string,
+    companyId: string,
+    params: any
+  ): Promise<ReceiptResponse> {
+    return this.postFormData<ReceiptResponse>(
+      userId,
+      companyId,
+      'api/1/receipts',
+      params
+    )
+  }
+
+  private postFormData<T = any>(
+    userId: string,
+    companyId: string,
+    path: string,
+    params: FormData
+  ): Promise<T> {
+    console.log('post FormData:', params)
+    return api
+      .post<T>(path, params, userId)
       .then(response => response.data)
       .catch(error => {
         console.error(`Error occured for posting ${path}:`, error.response)
