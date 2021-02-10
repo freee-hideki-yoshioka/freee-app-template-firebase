@@ -166,13 +166,13 @@ class FreeeApi {
   /**
    * get api/1/deals/${id}
    */
-  getDeal(
-    userId: string,
-    companyId: string,
-    id: string
-  ): Promise<any> {
+  getDeal(userId: string, companyId: string, id: string): Promise<any> {
     return api
-      .get<DealResponse>(`api/1/deals/718306723`, { company_id: companyId }, userId)
+      .get<DealResponse>(
+        `api/1/deals/718306723`,
+        { company_id: companyId },
+        userId
+      )
       .then(response => {
         console.log(response.data)
         response.data

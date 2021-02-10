@@ -105,7 +105,7 @@ class Demo {
     if (user && user.uid === this.lastUid) return
     const getFunction = await FunctionAPI.getFunction()
     const getFirestore = await FunctionAPI.getFirestore()
-  //  const firestore = await firebase.firestore().collection("freeeTokens").doc("3194568").get()
+    //  const firestore = await firebase.firestore().collection("freeeTokens").doc("3194568").get()
     console.log(getFunction)
     console.log(getFirestore)
     if (user) {
@@ -155,8 +155,6 @@ class Demo {
   }
 
   private async login(user: firebase.User) {
-
-
     this.lastUid = user.uid
     this.nameContainer.innerText = user.displayName!
     this.uidContainer.innerText = user.uid
