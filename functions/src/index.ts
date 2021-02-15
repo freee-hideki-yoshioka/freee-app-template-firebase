@@ -16,11 +16,36 @@ exports.getFunction = baseFunction.https.onCall(() => {
 })
 
 exports.getFirestore = baseFunction.https.onCall(() => {
-  return admin
-    .firestore()
-    .collection('freeeTokens')
-    .doc('31945681')
-    .get()
+/*
+  const test = async (data: any, context: any) => {
+    await admin.firestore().collection("freeeTokens").get()
+  }
+  for (let step = 0; step < 5; step++) {
+    console.log(test[step])
+  }
+*/
+return async (data: any, context: any) => {
+  await admin.firestore().collection("freeeTokens").where('algorithm', '==', 'aes-256-cbc').get().then((doc) => {console.log(doc)})
+}
+
+  //return admin.firestore().collection("freeeTokens").get().then((doc) => {console.log(doc)})
+  // return admin.firestore().collection("freeeTokens").doc("3194568").get()
+/*
+  return admin.firestore().collection("freeeTokens").get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+        // doc.data() is never undefined for query doc snapshots
+        return console.log(doc.id, " => ", doc.data());
+    });
+*/
+/*
+  return admin.firestore()
+      .collection("freeeTokens")
+      .doc("3194568")
+      .get()
+      .then((doc) => {
+        return doc.exists
+      })
+*/
   // return admin.firestore().doc(`/freeeTokens/3194568`).get()
 })
 

@@ -109,12 +109,13 @@ class Demo {
     console.log(getFunction)
     console.log(getFirestore)
     if (user) {
-      this.login(user)
+   //   this.login(user)
     } else {
       if (!isLogin()) {
-        location.href = getRedirectUrl()
+    //    location.href = getRedirectUrl()
       }
     }
+
   }
 
   private onSignOutButtonClick() {
